@@ -10,7 +10,7 @@ type IUserRepository interface {
 	SaveUser(users model.Users)
 	UpdateUser(users model.Users)
 	DeleteUser(userId int) error
-	FindUserById(usersId int) (model.Users, error)
+	FindUserById(users int) (model.Users, error)
 	FindUserAll() []model.Users
 	FindUserByUsername(username string) (model.Users, error)
 }
