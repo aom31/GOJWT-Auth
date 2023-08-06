@@ -1,8 +1,25 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+	"project-for-portfolioDEV/GOJWT-Auth/handler"
 
-func NewRouter() *gin.Engine {
+	"github.com/gin-gonic/gin"
+)
 
-	return nil
+func NewRouter(authHandler *handler.AuthHandler) *gin.Engine {
+
+	route := gin.Default()
+
+	route.GET("", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, "welcome home")
+	})
+
+	router := route.Group("/api")
+	authenRouter := router.Group("/auth")
+
+	authenRouter.POST("/register", authHandler.Register)
+	authenRouter.POST("/login", authHandler.Login)
+
+	return route
 }
